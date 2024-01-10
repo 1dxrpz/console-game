@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "UZQIZiJ4nrEdb/CKdMIMa2GqtF9bJg2a9L+8augF04Nd3JJbIoTJzv0u/kaMDaykuQ3TtnLco0apTKQzi/e4vQ==",
+  "dgSpecHash": "BL8+Wf0E+HvZnR6W3vJ1F2gsjR0u4rROJonqZiAnf8eNJiiAGtko553I1CO/5Qd2ZeW8EfvvFrb9u6urcRVeRA==",
   "success": true,
   "projectFilePath": "C:\\Users\\scaph\\Desktop\\console-game\\ConsoleGame\\ConsoleGame.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\scaph\\.nuget\\packages\\pastel\\4.2.0\\pastel.4.2.0.nupkg.sha512"
+  ],
   "logs": []
 }
