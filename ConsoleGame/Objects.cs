@@ -3,8 +3,8 @@ public class Objects
 {
 	static Dictionary<char, string> objects = new()
 	{
-		{' ', " "},
-		{'0', " "},
+		{' ', "  "},
+		{'0', "  "},
 		{'T', "🌲"},
 		{'K', "🔑"},
 		{'L', "🔒"},
@@ -13,7 +13,7 @@ public class Objects
 		{'B', "🛌" }
 	};
 
-	static List<char> Colideable = ['T'];
+	static List<char> Colideable = ['T', '0'];
 
 	public static bool IsColideable(char obj) => Colideable.Contains(obj);
 	public static string GetObject(char key) => objects[key];

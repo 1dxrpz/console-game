@@ -1,19 +1,49 @@
 ﻿using ConsoleGame;
+using Pastel;
+using System.Drawing;
+using System.Numerics;
 
 public class Program
 {
 	static string Dices = "⚀⚁⚂⚃⚄⚅🎲";
 	static string[] borders = ["╭═", "──", "═╮", "│ ", " │", "╰═", "──", "═╯"];
 
+	static PlayerData Player = new();
+	static UI UI = new();
+	static Map Map = new();
+	static Objects Objects = new();
+
+	static List<string> inventory = new();
+	static bool inventoryOpen = false;
+	static bool selectingCategory = false;
+	static int currentItem = 0;
+
+	static string[] inventoryCategories = [
+		" ⚔️ Weapons   ",
+		" 🛡️ Armor     ",
+		" 👔 Clothes   ",
+		" 🍎 Food      ",
+		" 🧪 Heal/Mana ",
+		" 💫 Misc      ",
+	];
+
+	static void DrawInventory()
+	{
+		UI.DrawWindow(8, 15, borders, UI.ViewportWidth + 1, 10, "Inventory");
+		for (int i = 0; i < inventory.Count; i++)
+		{
+			Console.SetCursorPosition((UI.ViewportWidth + 1) * 2 + 1, 11 + i);
+
+			Console.Write(inventory[i]
+				.PastelBg(i == currentItem ? Color.White : Color.DarkOrchid)
+				.Pastel(i != currentItem ? Color.White : Color.Black)
+			);
+		}
+		inventoryOpen = true;
+	}
+
 	public static void Main(string[] args)
 	{
-		PlayerData Player = new();
-		UI UI = new();
-		Map Map = new();
-		Objects Objects = new();
-
-		bool inventory = false;
-
 		Console.CursorVisible = false;
 		Player.SetPosition(1, 1);
 		UI.DrawWindow(8, 10, borders, UI.ViewportWidth + 1, 0);
@@ -31,6 +61,8 @@ public class Program
 			Console.Write("(R) to start new game");
 		});
 
+		Player.Inventory[ItemType.Weapon].Add(new Sword());
+
 		while (true)
 		{
 			switch (Console.ReadKey(true).Key)
@@ -39,16 +71,44 @@ public class Program
 					Player.AddHealth(-13);
 					UI.Redraw(Player);
 					break;
+				case ConsoleKey.Enter:
+					if (inventoryOpen)
+					{
+						if (!selectingCategory)
+						{
+							selectingCategory = true;
+							inventory = Player.Inventory[(ItemType)currentItem].Select(v => v.Name).ToList();
+							DrawInventory();
+						}
+					}
+					break;
+				case ConsoleKey.UpArrow:
+					if (inventoryOpen)
+					{
+						currentItem = currentItem == 0 ? inventory.Count - 1 : currentItem - 1;
+						DrawInventory();
+					}
+					break;
+				case ConsoleKey.DownArrow:
+					if (inventoryOpen)
+					{
+						currentItem = currentItem == inventory.Count - 1 ? 0 : currentItem + 1;
+						DrawInventory();
+					}
+					break;
 				case ConsoleKey.E:
-					if (inventory)
+					currentItem = 0;
+					selectingCategory = false;
+					inventory = inventoryCategories.ToList();
+					if (inventoryOpen)
 					{
 						UI.ClearWindow(8, 15, UI.ViewportWidth + 1, 10);
-						inventory = false;
+						inventoryOpen = false;
 					}
 					else
 					{
-						UI.DrawWindow(8, 15, borders, UI.ViewportWidth + 1, 10, "Inventory");
-						inventory = true;
+						DrawInventory();
+						UI.Redraw(Player);
 					}
 					break;
 				case ConsoleKey.W:

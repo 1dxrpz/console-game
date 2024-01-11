@@ -8,13 +8,23 @@ public class PlayerData
 	public (float current, float max) Mana { get; private set; } = (100, 100);
 	public (int health, int mana) Regen { get; private set; } = (12, 10);
 	public float Strength { get; set; }
-	public int AttackSpeed { get; set; }
+	public int Armor { get; set; }
 	public int RegenMultiplier { get; set; }
 	public int Level { get; set; }
+	public int Money { get; set; }
+	public int Coins { get; set; }
 	public (int current, int max) Experience { get; set; }
 
-	public List<int> Inventory { get; set; } = new();
-
+	public Dictionary<ItemType, List<Item>> Inventory { get; set; } = new()
+	{
+		{ ItemType.Weapon, new() },
+		{ ItemType.Armor, new() },
+		{ ItemType.Clothes, new() },
+		{ ItemType.Food	, new() },
+		{ ItemType.HealMana, new() },
+		{ ItemType.Misc, new() },
+	};
+	
 	public void SetHealth(float health)
 	{
 		Health = (health, Health.max);

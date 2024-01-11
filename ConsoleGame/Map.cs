@@ -1,18 +1,69 @@
-﻿namespace ConsoleGame;
+﻿using Pastel;
+using System.Drawing;
+using System.Text.RegularExpressions;
+
+namespace ConsoleGame;
 
 public class Map
 {
-	public int MapWidth = 6;
-	public int MapHeight = 6;
+	public int MapWidth = 16;
+	public int MapHeight = 16;
 
-	static string[] map = [
-		"TTTTTT",
-		"T    T",
-		"T    T",
-		"TTT BT",
-		"T    T",
-		"TTTTTT"
+	static Dictionary<int, Color> ColorMap = new()
+	{
+		{ 0, Color.FromArgb(30, 100, 30) },
+		{ 1, Color.FromArgb(204, 177, 102) },
+		{ 2, Color.FromArgb(30, 30, 30) },
+		{ 3, Color.FromArgb(30, 30, 30) },
+		{ 4, Color.FromArgb(30, 30, 30) },
+		{ 5, Color.FromArgb(30, 30, 30) },
+		{ 6, Color.FromArgb(30, 30, 30) },
+		{ 7, Color.FromArgb(30, 30, 30) },
+		{ 8, Color.FromArgb(30, 30, 30) },
+		{ 9, Color.FromArgb(30, 30, 30) },
+	};
+
+	static string[] groundMap = [
+		"0000000000000000",
+		"0100000000000000",
+		"0110000000000000",
+		"0100000000000000",
+		"0000000000000000",
+		"0000000000000000",
+		"0000000000000000",
+		"0000000000000000",
+		"0000000000000000",
+		"0000000000000000",
+		"0000000000000000",
+		"0000000000000000",
+		"0000000000000000",
+		"0000000000000000",
+		"0000000000000000",
+		"0000000000000000",
 	];
+	static string[] map = [
+		"TTTTTTTTTTTTTTTT",
+		"T              T",
+		"T              T",
+		"T              T",
+		"T              T",
+		"T              T",
+		"T              T",
+		"T              T",
+		"T              T",
+		"T              T",
+		"T              T",
+		"T              T",
+		"T              T",
+		"T              T",
+		"T              T",
+		"TTTTTTTTTTTTTTTT",
+	];
+
+	public Map()
+	{
+	}
+
 	public char GetObjectKey(int x, int y)
 	{
 		return map[x][y];
@@ -25,17 +76,19 @@ public class Map
 			for (int x = Player.Position.x - UI.ViewportWidth / 2 + 1, xV = 1; xV < UI.ViewportWidth - 1; xV++, x++)
 			{
 				Console.SetCursorPosition(xV * 2, yV);
+				
 				if (y >= 0 && y < MapHeight && x >= 0 && x < MapWidth)
-					Console.Write(Objects.GetObject(map[y][x]));
+				{
+					var ground = ColorMap[int.Parse($"{groundMap[y][x]}")];
+					Console.Write(Objects.GetObject(map[y][x]).PastelBg(ground));
+				}
 				else
 				{
-					Console.ForegroundColor = ConsoleColor.DarkGreen;
-					Console.Write("##");
-					Console.ResetColor();
+					Console.Write("  ".PastelBg(Color.FromArgb(10, 10, 10)));
 				}
 			}
 		}
 		Console.SetCursorPosition(UI.ViewportWidth - 1, (UI.ViewportHeight + 2) / 2 - 1);
-		Console.Write("🫥");
+		Console.Write("🫥".PastelBg(ColorMap[int.Parse($"{groundMap[Player.Position.y][Player.Position.x]}")]));
 	}
 }

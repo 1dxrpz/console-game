@@ -68,16 +68,21 @@ public class UI
 
 		Console.ResetColor();
 
+		Console.SetCursorPosition(0, ViewportHeight);
+		Console.Write($"💵 {Player.Money}");
+		Console.SetCursorPosition(10, ViewportHeight);
+		Console.Write($"🪙 {Player.Coins}");
+
 		Console.SetCursorPosition(0, ViewportHeight + 1);
-		Console.Write($"⚔️ 10");
+		Console.Write($"⚔️ {Player.Strength:0.0#}");
 		Console.SetCursorPosition(10, ViewportHeight + 1);
-		Console.WriteLine($"🪽 24.6");
+		Console.WriteLine($"🛡️ {Player.Armor:0.0#}");
 		Console.SetCursorPosition(20, ViewportHeight + 1);
-		Console.WriteLine($"💚 1.2");
+		Console.WriteLine($"💚 {Player.RegenMultiplier:0.0#}");
 		Console.SetCursorPosition(30, ViewportHeight + 1);
-		Console.WriteLine($"LVL 12");
+		Console.WriteLine($"LVL {Player.Level}");
 		Console.SetCursorPosition(40, ViewportHeight + 1);
-		Console.WriteLine($"✨124/255");
+		Console.WriteLine($"✨{Player.Experience.current}/{Player.Experience.max}");
 	}
 	public void ClearWindow(int width, int height, int posX = 0, int posY = 0) =>
 	DrawWindow(width, height, ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "], posX, posY);
@@ -88,12 +93,12 @@ public class UI
 			for (int x = 0; x < width; x++)
 			{
 				var pos = (x, y);
-
-
-				Console.Write("  ");
+				
 				Console.SetCursorPosition((x + posX) * 2, y + posY);
 				switch (pos)
 				{
+					default: Console.Write("  ");
+						break;
 					case (0, 0):
 						Console.Write(borders[0]);
 						break;
