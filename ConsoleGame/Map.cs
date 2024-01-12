@@ -75,7 +75,7 @@ public class Map
 		{
 			for (int x = Player.Position.x - UI.ViewportWidth / 2 + 1, xV = 1; xV < UI.ViewportWidth - 1; xV++, x++)
 			{
-				Console.SetCursorPosition(xV * 2, yV);
+				Console.SetCursorPosition(xV * 2 + UI.MainWindowOffset, yV);
 				
 				if (y >= 0 && y < MapHeight && x >= 0 && x < MapWidth)
 				{
@@ -88,7 +88,7 @@ public class Map
 				}
 			}
 		}
-		Console.SetCursorPosition(UI.ViewportWidth - 1, (UI.ViewportHeight + 2) / 2 - 1);
-		Console.Write("🫥".PastelBg(ColorMap[int.Parse($"{groundMap[Player.Position.y][Player.Position.x]}")]));
+		Console.SetCursorPosition(UI.ViewportWidth - 1 + UI.MainWindowOffset, (UI.ViewportHeight + 2) / 2 - 1);
+		Console.Write("🐹".PastelBg(ColorMap[int.Parse($"{groundMap[Player.Position.y][Player.Position.x]}")]));
 	}
 }

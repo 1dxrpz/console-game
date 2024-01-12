@@ -30,6 +30,8 @@ public static class AnsiColors
 
 public class UI
 {
+	public static int MainWindowOffset = 34;
+
 	public static int ViewportWidth = 25;
 	public static int ViewportHeight = 25;
 	public static int ViewDistance = 6;
@@ -43,46 +45,52 @@ public class UI
 		var health = percent(Player.Health.current, Player.Health.max, 30);
 		var mana = percent(Player.Mana.current, Player.Mana.max, 30);
 
-		Console.SetCursorPosition(10, ViewportHeight + 2);
+		Console.SetCursorPosition(10 + MainWindowOffset, ViewportHeight + 2);
 		Console.WriteLine($"" +
 			$"{new string('▃', mana).Pastel(Color.FromArgb(92, 177, 181))}" +
 			$"{new string('▃', 30 - mana).Pastel(Color.FromArgb(40, 40, 40))}"
 		);
 
-		Console.SetCursorPosition(10, ViewportHeight + 3);
+		Console.SetCursorPosition(10 + MainWindowOffset, ViewportHeight + 3);
 		Console.WriteLine(
 			$"{new string('█', health).Pastel(Color.FromArgb(176, 59, 66))}" +
 			$"{new string('█', 30 - health).Pastel(Color.FromArgb(60, 60, 60))}"
 		);
 
-		Console.SetCursorPosition(0, ViewportHeight + 2);
+		Console.SetCursorPosition(MainWindowOffset, ViewportHeight + 2);
 		Console.WriteLine($"\x1b[40m{AnsiColors.WHITE}{Player.Mana.current,3:0#}/{Player.Mana.max}");
 
-		Console.SetCursorPosition(0, ViewportHeight + 3);
+		Console.SetCursorPosition(MainWindowOffset, ViewportHeight + 3);
 		Console.WriteLine($"\x1b[40m{AnsiColors.WHITE}{Player.Health.current,3:0#}/{Player.Health.max}");
 
-		Console.SetCursorPosition(45, ViewportHeight + 2);
+		Console.SetCursorPosition(45 + MainWindowOffset, ViewportHeight + 2);
 		Console.WriteLine($"\x1b[40m{AnsiColors.WHITE}+{Player.Regen.mana:0.0#}");
-		Console.SetCursorPosition(45, ViewportHeight + 3);
+		Console.SetCursorPosition(45 + MainWindowOffset, ViewportHeight + 3);
 		Console.WriteLine($"\x1b[40m{AnsiColors.WHITE}+{Player.Regen.health:0.0#}");
 
 		Console.ResetColor();
 
-		Console.SetCursorPosition(0, ViewportHeight);
-		Console.Write($"💵 {Player.Money}");
-		Console.SetCursorPosition(10, ViewportHeight);
-		Console.Write($"🪙 {Player.Coins}");
+		Console.SetCursorPosition(MainWindowOffset, ViewportHeight);
+		Console.Write($"\U0001f7e1 {Player.Money}");
+		Console.SetCursorPosition(10 + MainWindowOffset, ViewportHeight);
+		Console.Write($"⚪ {Player.Coins}");
 
-		Console.SetCursorPosition(0, ViewportHeight + 1);
+		Console.SetCursorPosition(MainWindowOffset, ViewportHeight + 1);
 		Console.Write($"⚔️ {Player.Strength:0.0#}");
-		Console.SetCursorPosition(10, ViewportHeight + 1);
+		Console.SetCursorPosition(10 + MainWindowOffset, ViewportHeight + 1);
 		Console.WriteLine($"🛡️ {Player.Armor:0.0#}");
-		Console.SetCursorPosition(20, ViewportHeight + 1);
-		Console.WriteLine($"💚 {Player.RegenMultiplier:0.0#}");
-		Console.SetCursorPosition(30, ViewportHeight + 1);
+		Console.SetCursorPosition(20 + MainWindowOffset, ViewportHeight + 1);
+		Console.WriteLine($"🤍 {Player.RegenMultiplier:0.0#}");
+		Console.SetCursorPosition(30 + MainWindowOffset, ViewportHeight + 1);
 		Console.WriteLine($"LVL {Player.Level}");
-		Console.SetCursorPosition(40, ViewportHeight + 1);
+		Console.SetCursorPosition(40 + MainWindowOffset, ViewportHeight + 1);
 		Console.WriteLine($"✨{Player.Experience.current}/{Player.Experience.max}");
+
+
+		Console.SetCursorPosition(ViewportWidth + 60, 0);
+		Console.Write($"╭═────────────═⌘═────────────═╮");
+		Console.SetCursorPosition(ViewportWidth + 60, 10);
+		Console.Write($"╰═────────────═⌘═────────────═╯");
 	}
 	public void ClearWindow(int width, int height, int posX = 0, int posY = 0) =>
 	DrawWindow(width, height, ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "], posX, posY);

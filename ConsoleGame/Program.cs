@@ -19,22 +19,22 @@ public class Program
 	static int currentItem = 0;
 
 	static string[] inventoryCategories = [
-		" ⚔️ Weapons   ",
-		" 🛡️ Armor     ",
-		" 👔 Clothes   ",
-		" 🍎 Food      ",
-		" 🧪 Heal/Mana ",
-		" 💫 Misc      ",
+		"⚔️ Weapons",
+		"🎯 Armor",
+		"👔 Clothes",
+		"🍎 Food",
+		"🧪 Heal/Mana",
+		"💫 Misc",
 	];
 
 	static void DrawInventory()
 	{
-		UI.DrawWindow(8, 15, borders, UI.ViewportWidth + 1, 10, "Inventory");
+		UI.DrawWindow(15, 15, borders, 1, 10, "Inventory");
 		for (int i = 0; i < inventory.Count; i++)
 		{
-			Console.SetCursorPosition((UI.ViewportWidth + 1) * 2 + 1, 11 + i);
-
-			Console.Write(inventory[i]
+			Console.SetCursorPosition(3, 11 + i);
+			
+			Console.Write($" {inventory[i].PadRight(27, ' ')}"
 				.PastelBg(i == currentItem ? Color.White : Color.DarkOrchid)
 				.Pastel(i != currentItem ? Color.White : Color.Black)
 			);
@@ -44,23 +44,27 @@ public class Program
 
 	public static void Main(string[] args)
 	{
+		Console.Clear();
 		Console.CursorVisible = false;
 		Player.SetPosition(1, 1);
-		UI.DrawWindow(8, 10, borders, UI.ViewportWidth + 1, 0);
-		UI.DrawWindow(UI.ViewportWidth, UI.ViewportHeight, borders);
+		UI.DrawWindow(15, 10, borders, 1, 0);
+		UI.DrawWindow(UI.ViewportWidth, UI.ViewportHeight, borders, UI.MainWindowOffset / 2);
 		UI.Redraw(Player);
 		Map.Redraw(Player);
 
 		Player.OnHealthEmpty(() =>
 		{
-			UI.DrawWindow(UI.ViewportWidth, UI.ViewportHeight, borders);
-			Console.SetCursorPosition(UI.ViewportWidth - 5, (UI.ViewportHeight + 2) / 2 - 1);
+			UI.DrawWindow(UI.ViewportWidth, UI.ViewportHeight, borders, UI.MainWindowOffset / 2);
+			Console.SetCursorPosition(UI.ViewportWidth - 5 + UI.MainWindowOffset, (UI.ViewportHeight + 2) / 2 - 1);
 
 			Console.Write("Game Over");
-			Console.SetCursorPosition(UI.ViewportWidth - 11, (UI.ViewportHeight + 2) / 2);
+			Console.SetCursorPosition(UI.ViewportWidth - 11 + UI.MainWindowOffset, (UI.ViewportHeight + 2) / 2);
 			Console.Write("(R) to start new game");
 		});
 
+		Player.Inventory[ItemType.Weapon].Add(new Sword());
+		Player.Inventory[ItemType.Weapon].Add(new Sword());
+		Player.Inventory[ItemType.Weapon].Add(new Sword());
 		Player.Inventory[ItemType.Weapon].Add(new Sword());
 
 		while (true)
@@ -102,7 +106,7 @@ public class Program
 					inventory = inventoryCategories.ToList();
 					if (inventoryOpen)
 					{
-						UI.ClearWindow(8, 15, UI.ViewportWidth + 1, 10);
+						UI.ClearWindow(15, 15, 1, 10);
 						inventoryOpen = false;
 					}
 					else
