@@ -30,11 +30,15 @@ public static class AnsiColors
 
 public class UI
 {
-	public static int MainWindowOffset = 34;
+	private UI() { }
+	public static UI Source { get; } = SingletonUtil<UI>.Instance;
 
-	public static int ViewportWidth = 25;
-	public static int ViewportHeight = 25;
-	public static int ViewDistance = 6;
+
+	public List<string> Dialogs = new();
+	public int MainWindowOffset = 34;
+	public int ViewportWidth = 25;
+	public int ViewportHeight = 25;
+	public int ViewDistance = 6;
 
 	int percent(float value, float max, int m) => (int)(value / (float)max * m);
 	
@@ -88,10 +92,20 @@ public class UI
 
 
 		Console.SetCursorPosition(ViewportWidth + 60, 0);
-		Console.Write($"╭═────────────═⌘═────────────═╮");
-		Console.SetCursorPosition(ViewportWidth + 60, 10);
-		Console.Write($"╰═────────────═⌘═────────────═╯");
+		Console.Write($"╭═────────────═ ⌘ ═────────────═╮");
+		Console.SetCursorPosition(ViewportWidth + 60, ViewportHeight - 1);
+		Console.Write($"╰═────────────═ ⌘ ═────────────═╯");
+
+		int dialog = 0;
+		Dialogs.TakeLast(20).ToList().ForEach(v =>
+		{
+			Console.SetCursorPosition(ViewportWidth + 61, 1 + dialog);
+			dialog++;
+
+			Console.Write(v);
+		});
 	}
+
 	public void ClearWindow(int width, int height, int posX = 0, int posY = 0) =>
 	DrawWindow(width, height, ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "], posX, posY);
 	public void DrawWindow(int width, int height, string[] borders, int posX = 0, int posY = 0, string label = "")

@@ -24,7 +24,13 @@ public class PlayerData
 		{ ItemType.HealMana, new() },
 		{ ItemType.Misc, new() },
 	};
-	
+
+	public bool AddItem(Item item) =>
+		Util.CreateConditional(
+			() => Inventory[item.ItemType].Count < 13, 
+			() => Inventory[item.ItemType].Add(item)
+		);
+
 	public void SetHealth(float health)
 	{
 		Health = (health, Health.max);

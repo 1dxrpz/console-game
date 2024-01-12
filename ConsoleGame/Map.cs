@@ -1,19 +1,23 @@
 ﻿using Pastel;
 using System.Drawing;
-using System.Text.RegularExpressions;
 
 namespace ConsoleGame;
 
 public class Map
 {
+	private Map() { }
+	public static Map Source { get; } = SingletonUtil<Map>.Instance;
+
+	UI UI { get; set; } = UI.Source;
+
 	public int MapWidth = 16;
 	public int MapHeight = 16;
 
-	static Dictionary<int, Color> ColorMap = new()
+	Dictionary<int, Color> ColorMap = new()
 	{
-		{ 0, Color.FromArgb(30, 100, 30) },
+		{ 0, Color.FromArgb(39, 156, 84) },
 		{ 1, Color.FromArgb(204, 177, 102) },
-		{ 2, Color.FromArgb(30, 30, 30) },
+		{ 2, Color.FromArgb(59, 124, 150) },
 		{ 3, Color.FromArgb(30, 30, 30) },
 		{ 4, Color.FromArgb(30, 30, 30) },
 		{ 5, Color.FromArgb(30, 30, 30) },
@@ -23,46 +27,42 @@ public class Map
 		{ 9, Color.FromArgb(30, 30, 30) },
 	};
 
-	static string[] groundMap = [
-		"0000000000000000",
-		"0100000000000000",
-		"0110000000000000",
-		"0100000000000000",
-		"0000000000000000",
-		"0000000000000000",
-		"0000000000000000",
-		"0000000000000000",
-		"0000000000000000",
-		"0000000000000000",
-		"0000000000000000",
-		"0000000000000000",
-		"0000000000000000",
-		"0000000000000000",
-		"0000000000000000",
-		"0000000000000000",
+	string[] groundMap = [
+		"2222222222222222",
+		"2222222222222222",
+		"2222222222222222",
+		"2222222111222222",
+		"2222211101122222",
+		"2222111001122222",
+		"2222110001222222",
+		"2222211011222222",
+		"2222221112222222",
+		"2222222222222222",
+		"2222222222222222",
+		"2222222222222222",
+		"2222222222222222",
+		"2222222222222222",
+		"2222222222222222",
+		"2222222222222222",
 	];
-	static string[] map = [
-		"TTTTTTTTTTTTTTTT",
-		"T              T",
-		"T              T",
-		"T              T",
-		"T              T",
-		"T              T",
-		"T              T",
-		"T              T",
-		"T              T",
-		"T              T",
-		"T              T",
-		"T              T",
-		"T              T",
-		"T              T",
-		"T              T",
-		"TTTTTTTTTTTTTTTT",
+	string[] map = [
+		"W W W W W W W W ",
+		" W W W W W W W W",
+		"W W W W W W W W ",
+		" W W W W W W W W",
+		"W W W W W W W W ",
+		" W W W W W W W W",
+		"W W W W W W W W ",
+		" W W W W W W W W",
+		"W W W W W W W W ",
+		" W W W W W W W W",
+		"W W W W W W W W ",
+		" W W W W W W W W",
+		"W W W W W W W W ",
+		" W W W W W W W W",
+		"W W W W W W W W ",
+		" W W W W W W W W",
 	];
-
-	public Map()
-	{
-	}
 
 	public char GetObjectKey(int x, int y)
 	{
