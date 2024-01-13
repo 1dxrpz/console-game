@@ -11,6 +11,34 @@ public static class Util
 			action();
 			return true;
 		})();
+
+
+	public static IEnumerable<string> ChunkSplit(this string str, int chunkSize)
+	{
+		return Enumerable.Range(0, str.Length / chunkSize)
+			.Select(i => str.Substring(i * chunkSize, chunkSize));
+	}
+	public static IEnumerable<string> WordWrap(this string str, int chunkSize)
+	{
+		var lines = new List<string>();
+		var words = str.Split(" ");
+		string result = "";
+		foreach (var item in words)
+		{
+			if (words.Length + result.Length <= chunkSize)
+			{
+				result += $"{item} ";
+
+			}
+			else
+			{
+				lines.Add(result);
+				result = $"{item} ";
+			}
+		}
+		return lines;
+	}
+
 }
 
 public class SingletonUtil<T> where T : class
@@ -41,5 +69,5 @@ public class SingletonUtil<T> where T : class
 		}
 	}
 
-	
+
 }
