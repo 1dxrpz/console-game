@@ -25,6 +25,7 @@ public class Game
 	PlayerData Player = new();
 	UI UI { get; set; } = UI.Source;
 	Map Map { get; set; } = Map.Source;
+	DialogSystem DialogSystem { get; set; } = DialogSystem.Source;
 	Inventory Inventory { get; set; } = Inventory.Source;
 
 	public Game()
@@ -64,12 +65,6 @@ public class Game
 
 			switch (key)
 			{
-				case ConsoleKey.R:
-					Random random = new Random();
-					UI.Dialogs.Add("# Name Name - (19)".Pastel(Color.Plum));
-					UI.Dialogs.Add(" Hello there!".Pastel(Color.Wheat));
-					UI.Redraw(Player);
-					break;
 				case ConsoleKey.T:
 					Player.AddHealth(-13);
 					UI.Redraw(Player);

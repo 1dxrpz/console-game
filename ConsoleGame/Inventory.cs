@@ -47,6 +47,7 @@ public class Inventory : GameEvents
 						currentCategory = (ItemType)currentItem;
 						inventory = Player.Inventory[(ItemType)currentItem].Select(v => v.Name).ToList();
 						currentItem = 0;
+						Console.Beep(200, 100);
 						DrawInventory();
 					}
 				}
@@ -56,6 +57,7 @@ public class Inventory : GameEvents
 				{
 					currentItem = currentItem == 0 ? inventory.Count - 1 : currentItem - 1;
 					DrawInventory();
+					Console.Beep(100, 100);
 				}
 				break;
 			case ConsoleKey.DownArrow:
@@ -63,6 +65,7 @@ public class Inventory : GameEvents
 				{
 					currentItem = currentItem == inventory.Count - 1 ? 0 : currentItem + 1;
 					DrawInventory();
+					Console.Beep(100, 100);
 				}
 				break;
 			case ConsoleKey.E:
@@ -71,6 +74,7 @@ public class Inventory : GameEvents
 				inventory = inventoryCategories.ToList();
 				if (inventoryOpen)
 				{
+					Console.Beep(150, 100);
 					UI.ClearWindow(15, 15, 1, 10);
 					DrawInventory();
 					UI.Redraw(Player);

@@ -33,8 +33,6 @@ public class UI
 	private UI() { }
 	public static UI Source { get; } = SingletonUtil<UI>.Instance;
 
-
-	public List<string> Dialogs = new();
 	public int MainWindowOffset = 34;
 	public int ViewportWidth = 25;
 	public int ViewportHeight = 25;
@@ -95,15 +93,6 @@ public class UI
 		Console.Write($"╭═────────────═ ⌘ ═────────────═╮");
 		Console.SetCursorPosition(ViewportWidth + 60, ViewportHeight - 1);
 		Console.Write($"╰═────────────═ ⌘ ═────────────═╯");
-
-		int dialog = 0;
-		Dialogs.TakeLast(20).ToList().ForEach(v =>
-		{
-			Console.SetCursorPosition(ViewportWidth + 61, 1 + dialog);
-			dialog++;
-
-			Console.Write(v);
-		});
 	}
 
 	public void ClearWindow(int width, int height, int posX = 0, int posY = 0) =>
