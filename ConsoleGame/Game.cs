@@ -1,4 +1,5 @@
 ﻿using Pastel;
+using System;
 using System.Drawing;
 
 namespace ConsoleGame;
@@ -32,7 +33,9 @@ public class Game
 	{
 		GameEvents.Player = Player;
 
-		Console.Clear();
+
+
+        Console.Clear();
 		Console.CursorVisible = false;
 		Player.SetPosition(1, 1);
 

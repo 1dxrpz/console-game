@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "BL8+Wf0E+HvZnR6W3vJ1F2gsjR0u4rROJonqZiAnf8eNJiiAGtko553I1CO/5Qd2ZeW8EfvvFrb9u6urcRVeRA==",
+  "dgSpecHash": "+odQSbNw9F2Lj1emvbKCpqRyQuD/QiybTMYWQABWgcLAJxa5uZNHxrowvtTB8B+/ddqmiTdzRUx5CBnROEz4hQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\scaph\\Desktop\\console-game\\ConsoleGame\\ConsoleGame.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\scaph\\.nuget\\packages\\pastel\\4.2.0\\pastel.4.2.0.nupkg.sha512"
+    "C:\\Users\\scaph\\.nuget\\packages\\pastel\\4.2.0\\pastel.4.2.0.nupkg.sha512",
+    "C:\\Users\\scaph\\.nuget\\packages\\system.speech\\8.0.0\\system.speech.8.0.0.nupkg.sha512"
   ],
   "logs": []
 }

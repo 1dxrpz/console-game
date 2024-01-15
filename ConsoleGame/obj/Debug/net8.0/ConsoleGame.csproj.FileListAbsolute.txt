@@ -34,3 +34,5 @@ C:\Users\HP\Desktop\console-game\ConsoleGame\obj\Debug\net8.0\refint\ConsoleGame
 C:\Users\HP\Desktop\console-game\ConsoleGame\obj\Debug\net8.0\ConsoleGame.pdb
 C:\Users\HP\Desktop\console-game\ConsoleGame\obj\Debug\net8.0\ConsoleGame.genruntimeconfig.cache
 C:\Users\HP\Desktop\console-game\ConsoleGame\obj\Debug\net8.0\ref\ConsoleGame.dll
+C:\Users\scaph\Desktop\console-game\ConsoleGame\bin\Debug\net8.0\System.Speech.dll
+C:\Users\scaph\Desktop\console-game\ConsoleGame\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Speech.dll

@@ -90,5 +90,9 @@ public class Map
 		}
 		Console.SetCursorPosition(UI.ViewportWidth - 1 + UI.MainWindowOffset, (UI.ViewportHeight + 2) / 2 - 1);
 		Console.Write("🐹".PastelBg(ColorMap[int.Parse($"{groundMap[Player.Position.y][Player.Position.x]}")]));
-	}
+
+		UI.DrawWindow(11, 3, BaseData.bordersMergeTop, UI.MainWindowOffset - 10, 0);
+		Console.SetCursorPosition((UI.MainWindowOffset - 9) * 2, 1);
+        Console.Write("f".PadCenter(18, '_'));
+    }
 }
